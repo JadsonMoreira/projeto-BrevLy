@@ -1,10 +1,10 @@
 # Etapa 1: Build da aplicação TypeScript
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 
 WORKDIR /app
 
-# Copia os manifestos de dependências
-COPY package*.json tsconfig.json ./
+# Copia os manifestos de dependências e configs
+COPY package*.json tsconfig.json tsup.config.ts ./
 
 # Instala todas as dependências (incluindo devDependencies para compilar)
 RUN npm install
@@ -12,12 +12,11 @@ RUN npm install
 # Copia o código fonte
 COPY src ./src
 
-# Compila o TypeScript para JavaScript puro na pasta dist
-RUN npx tsc --outDir dist
-
+# Executa o script de build configurado no package.json (tsup)
+RUN npm run build
 
 # Etapa 2: Imagem final leve para Produção
-FROM node:22-alpine AS runner
+FROM node:24-alpine AS runner
 
 WORKDIR /app
 
