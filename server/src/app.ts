@@ -37,7 +37,9 @@ app.setErrorHandler((error, request, reply) => {
 	});
 });
 
-app.register(fastifyCors, { origin: "*" });
+app.register(fastifyCors, { origin: "*",
+	methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+ });
 
 app.register(fastifyMultipart);
 app.register(fastifySwagger, {
