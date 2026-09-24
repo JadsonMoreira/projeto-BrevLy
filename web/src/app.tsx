@@ -1,9 +1,10 @@
-export function App() {
+import { Home } from "./pages/home";
 
+export function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-     Hello World
-    </h1>
+    <main>
+      <Home/>
+    </main>
   )
 }
 
