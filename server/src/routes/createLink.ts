@@ -12,7 +12,7 @@ export const createLinkRoute: FastifyPluginAsyncZod = async (app) => {
 				description: "Create a new link with the provided data",
 				body: z.object({
 					urlOriginal: z.string().url(),
-					urlShort: z.string(),
+					shortUrl: z.string(),
 				}),
 				response: {
 					201: z.object({ message: z.string() }),
@@ -26,7 +26,7 @@ export const createLinkRoute: FastifyPluginAsyncZod = async (app) => {
 			try {
 				await createLinkService({
 					originalUrl: request.body.urlOriginal,
-					shortUrl: request.body.urlShort || "",
+					shortUrl: request.body.shortUrl || "",
 				});
 				return reply.status(201).send({ message: "Link created successfully" });
 			} catch (error: any) {
