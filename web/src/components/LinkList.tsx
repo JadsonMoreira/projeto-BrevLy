@@ -1,4 +1,4 @@
-import { CircleNotchIcon, LinkIcon, WarningIcon } from "@phosphor-icons/react";
+import { CircleNotchIcon, LinkIcon } from "@phosphor-icons/react";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useEffect, useState } from "react";
 import { listAllLinksService } from "../api/listAllLinksService";
@@ -52,9 +52,11 @@ export function LinkList() {
 
 		// Escuta o evento e recarrega os links automaticamente
 		window.addEventListener("link-created", loadLinks);
+		window.addEventListener("link-deleted", loadLinks);
 		// Limpa o ouvinte quando o componente for desmontado
 		return () => {
 			window.removeEventListener("link-created", loadLinks);
+			window.removeEventListener("link-deleted", loadLinks);
 		};
 	}, []);
 

@@ -9,8 +9,13 @@ interface IFormInput {
 }
 
 export function LinkForm() {
-	const { register, handleSubmit, reset, formState: { errors }} = useForm<IFormInput>({
-		  mode: "onChange"
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors },
+	} = useForm<IFormInput>({
+		mode: "onChange",
 	});
 
 	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
@@ -46,9 +51,8 @@ export function LinkForm() {
 					{...register("url", {
 						required: "informe uma url válida",
 						pattern: {
-					 value: /^[a-z][a-z\d+.-]*:\/\//i,
-					message: "informe uma url válida",
-					
+							value: /^[a-z][a-z\d+.-]*:\/\//i,
+							message: "informe uma url válida",
 						},
 					})}
 				/>
@@ -60,17 +64,19 @@ export function LinkForm() {
 					autoCapitalize="none"
 					spellCheck={false}
 					error={errors.shortUrl?.message}
-					 {...register("shortUrl", {
-					required: "informe uma url minúscula e sem espaço/caracter especial.",
-					pattern: {
-					 value: /^[a-z0-9_-]{1,64}$/,
-					message: "informe uma url minúscula e sem espaço/caracter especial.",
-					},
-				})}
+					{...register("shortUrl", {
+						required:
+							"informe uma url minúscula e sem espaço/caracter especial.",
+						pattern: {
+							value: /^[a-z0-9_-]{1,64}$/,
+							message:
+								"informe uma url minúscula e sem espaço/caracter especial.",
+						},
+					})}
 				/>
 			</div>
 
-			<Button type="submit" >Salvar link</Button>
+			<Button type="submit">Salvar link</Button>
 		</form>
 	);
 }

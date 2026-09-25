@@ -2,6 +2,8 @@ import { CircleNotchIcon, CopyIcon, TrashIcon } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { getShortLinkLabel, getShortLinkUrl } from "../utils/shortLink";
 import { IconButton } from "./ui/icon-button";
+import { useState } from "react";
+import { deleteLinkService } from "../api/deleteLinkService";
 
 const numberFormatter = new Intl.NumberFormat("pt-BR");
 
@@ -22,6 +24,24 @@ interface LinkItemProps {
 }
 
 export function LinkItem({ link }: LinkItemProps) {
+	const [isDeleting, setDeleting] = useState(false);
+
+	async function deleteLink(id: string) {
+		try {
+			setDeleting(true);
+
+			//  await new Promise((resolve) => setTimeout(resolve, 5000));
+
+			await deleteLinkService(id);
+
+			window.dispatchEvent(new Event("link-deleted"));
+		} catch (error) {
+			console.error("Erro ao deletar links:", error);
+		} finally {
+			setDeleting(false);
+		}
+	}
+
 	const shortLinkUrl = getShortLinkUrl(link.shortUrl);
 
 	async function handleCopyLink() {
@@ -36,8 +56,10 @@ export function LinkItem({ link }: LinkItemProps) {
 			});
 		}
 	}
+
 	function handleDeleteLink() {
 		if (window.confirm(`Você realmente quer apagar o link ${link.shortUrl}?`)) {
+			deleteLink(link.id);
 		}
 	}
 
@@ -65,7 +87,7 @@ export function LinkItem({ link }: LinkItemProps) {
 				<IconButton
 					label={`Copiar link ${link.shortUrl}`}
 					onClick={handleCopyLink}
-					// disabled={isDeleting}
+					disabled={isDeleting}
 				>
 					<CopyIcon size={16} />
 				</IconButton>
@@ -73,13 +95,13 @@ export function LinkItem({ link }: LinkItemProps) {
 				<IconButton
 					label={`Apagar link ${link.shortUrl}`}
 					onClick={handleDeleteLink}
-					// disabled={isDeleting}
+					disabled={isDeleting}
 				>
-					{/* {isDeleting ? ( */}
-					{/* <CircleNotchIcon size={16} className="animate-spin" /> */}
-					{/* // ) : ( */}
-					<TrashIcon size={16} />
-					{/* )} */}
+					{isDeleting ? (
+						<CircleNotchIcon size={16} className="animate-spin" />
+					) : (
+						<TrashIcon size={16} />
+					)}
 				</IconButton>
 			</div>
 		</div>
