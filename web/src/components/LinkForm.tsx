@@ -1,27 +1,31 @@
+import { type SubmitHandler, useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import { type SubmitHandler, useForm } from "react-hook-form";
-
+import { createLinkService } from "../api/createLinkService";
+import { toast } from "sonner";
 interface IFormInput {
-	originalUrl: string;
+	url: string;
 	shortUrl: string;
 }
 
 export function LinkForm() {
-	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		setValue,
-		watch,
-		getValues,
-	} = useForm<IFormInput>();
+	const { register, handleSubmit, reset, formState: { errors }} = useForm<IFormInput>({
+		  mode: "onChange"
+	});
 
-	const [originalUrl, shortUrl] = watch(["originalUrl", "shortUrl"]);
+	const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+		try {
+			await createLinkService(data.url, data.shortUrl);
 
-	const isButtonDisabled = !originalUrl?.trim() || !shortUrl?.trim();
-
-	const onSubmit: SubmitHandler<IFormInput> = async (data) => {};
+			window.dispatchEvent(new Event("link-created"));
+			reset();
+		} catch (error: any) {
+			const errorMessage = error.response?.data?.message;
+			toast.error("Erro no cadastro", {
+				description: errorMessage,
+			});
+		}
+	};
 
 	return (
 		<form
@@ -38,8 +42,15 @@ export function LinkForm() {
 					autoComplete="off"
 					autoCapitalize="none"
 					spellCheck={false}
-					//   error={errors.originalUrl?.message}
-					{...register("originalUrl")}
+					error={errors.url?.message}
+					{...register("url", {
+						required: "informe uma url válida",
+						pattern: {
+					 value: /^[a-z][a-z\d+.-]*:\/\//i,
+					message: "informe uma url válida",
+					
+						},
+					})}
 				/>
 
 				<Input
@@ -48,14 +59,18 @@ export function LinkForm() {
 					autoComplete="off"
 					autoCapitalize="none"
 					spellCheck={false}
-					//   error={errors.shortUrl?.message}
-					{...register("shortUrl")}
+					error={errors.shortUrl?.message}
+					 {...register("shortUrl", {
+					required: "informe uma url minúscula e sem espaço/caracter especial.",
+					pattern: {
+					 value: /^[a-z0-9_-]{1,64}$/,
+					message: "informe uma url minúscula e sem espaço/caracter especial.",
+					},
+				})}
 				/>
 			</div>
 
-			<Button type="submit" disabled={isButtonDisabled}>
-				Salvar link
-			</Button>
+			<Button type="submit" >Salvar link</Button>
 		</form>
 	);
 }

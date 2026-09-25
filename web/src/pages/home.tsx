@@ -1,4 +1,5 @@
 import { LinkForm } from "../components/LinkForm";
+import { LinkList } from "../components/LinkList";
 import { Logo } from "../components/logo";
 
 export function Home() {
@@ -8,7 +9,10 @@ export function Home() {
 				<Logo />
 			</div>
 
-			<LinkForm />
+			<div className="flex flex-col gap-3 lg:min-h-0 lg:flex-1 lg:flex-row lg:items-start lg:gap-5">
+				<LinkForm />
+				<LinkList />
+			</div>
 		</main>
 	);
 }
