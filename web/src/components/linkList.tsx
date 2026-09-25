@@ -3,30 +3,17 @@ import * as ScrollArea from "@radix-ui/react-scroll-area";
 import { useEffect, useState } from "react";
 import { listAllLinksService } from "../api/listAllLinksService";
 import { ExportLinksButton } from "./exportLinksButton";
-import { LinkItem } from "./linkItem";
+import { LinkItem, type Link } from "./linkItem";
 import { LinkListFeedback } from "./linkListFeedback";
 import { ProgressBar } from "./ui/progressBar";
 
-// Tipagem do Link esperado pelo componente LinkItem
-export interface Link {
-	id: string;
-	url: string;
-	shortUrl: string;
-	accesses: number;
-	createdAt: string;
-}
-
 export function LinkList() {
-	// Estados locais para controlar a lista e o carregamento
 	const [links, setLinks] = useState<Link[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
 
-	// Função que busca os links na API e atualiza o estado
 	async function loadLinks() {
 		try {
 			setIsLoading(true);
-
-			//  await new Promise((resolve) => setTimeout(resolve, 5000));
 
 			const data = await listAllLinksService();
 

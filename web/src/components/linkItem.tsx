@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { CircleNotchIcon, CopyIcon, TrashIcon } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import { getShortLinkLabel, getShortLinkUrl } from "../utils/shortLink";
@@ -13,14 +14,18 @@ export function formatAccessCount(accessCount: number) {
 	return `${numberFormatter.format(accessCount)} ${label}`;
 }
 
+export const linkSchema = z.object({
+	id: z.string(),
+	url: z.string().url(),
+	shortUrl: z.string(),
+	accesses: z.number(),
+	createdAt: z.string(),
+});
+
+export type Link = z.infer<typeof linkSchema>;
+
 interface LinkItemProps {
-	link: {
-		id: string;
-		url: string;
-		shortUrl: string;
-		accesses: number;
-		createdAt: string;
-	};
+	link: Link;
 }
 
 export function LinkItem({ link }: LinkItemProps) {
@@ -29,8 +34,6 @@ export function LinkItem({ link }: LinkItemProps) {
 	async function deleteLink(id: string) {
 		try {
 			setDeleting(true);
-
-			//  await new Promise((resolve) => setTimeout(resolve, 5000));
 
 			await deleteLinkService(id);
 

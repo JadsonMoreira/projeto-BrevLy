@@ -8,14 +8,10 @@ export function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				{/* 1. Página inicial (cadastro e lista de links) */}
 				<Route path="/" element={<Home />} />
-				{/* 3. Rota dinâmica de redirecionamento (ex: localhost:5173/meu-link) */}
 				<Route path="/:shortUrl" element={<Redirect />} />
-				{/* 4. Qualquer rota inexistente cai na tela de 404 */}
 				<Route path="*" element={<NotFound />} />
 			</Routes>
-			{/* Notificações flutuantes */}
 			<Toaster richColors position="bottom-right" />
 		</BrowserRouter>
 	);
