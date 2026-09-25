@@ -46,21 +46,25 @@ export function LinkList() {
 		}
 	}
 
-	// Executa ao carregar o componente na tela
 	useEffect(() => {
 		loadLinks();
 
-		// Escuta o evento e recarrega os links automaticamente
+		const channel = new BroadcastChannel("links_channel");
+		channel.onmessage = () => {
+			loadLinks();
+		};
+
 		window.addEventListener("link-created", loadLinks);
 		window.addEventListener("link-deleted", loadLinks);
+
 		// Limpa o ouvinte quando o componente for desmontado
 		return () => {
+			channel.close();
 			window.removeEventListener("link-created", loadLinks);
 			window.removeEventListener("link-deleted", loadLinks);
 		};
 	}, []);
 
-	// Renderiza os estados visuais (carregando, erro, lista ou vazio)
 	function renderLinks() {
 		if (isLoading) {
 			return (

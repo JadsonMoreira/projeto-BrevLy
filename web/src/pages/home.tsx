@@ -1,5 +1,5 @@
-import { LinkForm } from "../components/LinkForm";
-import { LinkList } from "../components/LinkList";
+import { LinkForm } from "../components/linkForm";
+import { LinkList } from "../components/linkList";
 import { Logo } from "../components/logo";
 
 export function Home() {
