@@ -22,7 +22,6 @@ const IncreaseAccessToLinkService = async (linkId: string) => {
 			.update(schemas.linksDb)
 			.set({ accesses: link.accesses + 1 })
 			.where(eq(schemas.linksDb.id, linkId));
-
 	} catch (error) {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,

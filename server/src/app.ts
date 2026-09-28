@@ -37,9 +37,10 @@ app.setErrorHandler((error, request, reply) => {
 	});
 });
 
-app.register(fastifyCors, { origin: "*",
-	methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
- });
+app.register(fastifyCors, {
+	origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+	methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+});
 
 app.register(fastifyMultipart);
 app.register(fastifySwagger, {
