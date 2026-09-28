@@ -45,7 +45,7 @@ const exportCSVLinksService = async () => {
 			}),
 		);
 
-		const fileUrl = `${env.CLOUDFLARE_PUBLIC_URL}/${fileName}`;
+		const fileUrl = `${env.CLOUDFLARE_PUBLIC_URL}/csv/${fileName}`;
 
 		return {
 			url: fileUrl,
