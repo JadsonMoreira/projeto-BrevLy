@@ -12,7 +12,7 @@ const IncreaseAccessToLinkService = async (linkId: string) => {
 
 		if (!link) {
 			throw new DefaultError({
-				message: "Link not found",
+				message: "URL não encontrada",
 				statusCode: 404,
 				type: "error",
 			});
@@ -27,7 +27,7 @@ const IncreaseAccessToLinkService = async (linkId: string) => {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to increase link access count",
+			message: "Falha ao incrementar a contagem de acessos da URL",
 		});
 	}
 };

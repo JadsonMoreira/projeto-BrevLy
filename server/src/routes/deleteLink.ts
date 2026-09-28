@@ -16,10 +16,10 @@ export const deleteLinkRoute: FastifyPluginAsyncZod = async (app) => {
 				response: {
 					200: z
 						.object({ message: z.string() })
-						.describe("Link deleted successfully"),
+						.describe("URL deletada com sucesso"),
 					400: z
 						.object({ message: z.string() })
-						.describe("Failed to delete link"),
+						.describe("Falha ao deletar a URL"),
 				},
 			},
 		},
@@ -27,7 +27,7 @@ export const deleteLinkRoute: FastifyPluginAsyncZod = async (app) => {
 			try {
 				const { id } = request.params as { id: string };
 				await deleteLinkService(id);
-				return reply.status(200).send({ message: "Link deleted successfully" });
+				return reply.status(200).send({ message: "URL deletada com sucesso" });
 			} catch (error: any) {
 				return reply.status(400).send({ message: error.message });
 			}

@@ -18,7 +18,7 @@ export const createLinkRoute: FastifyPluginAsyncZod = async (app) => {
 					201: z.object({ message: z.string() }),
 					400: z
 						.object({ message: z.string() })
-						.describe("Failed to create link"),
+						.describe("Falha ao criar a URL"),
 				},
 			},
 		},
@@ -28,7 +28,7 @@ export const createLinkRoute: FastifyPluginAsyncZod = async (app) => {
 					originalUrl: request.body.urlOriginal,
 					shortUrl: request.body.shortUrl || "",
 				});
-				return reply.status(201).send({ message: "Link created successfully" });
+				return reply.status(201).send({ message: "URL criada com sucesso" });
 			} catch (error: any) {
 				return reply.status(400).send({ message: error.message });
 			}

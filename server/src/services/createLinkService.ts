@@ -9,7 +9,7 @@ const createLinkService = async (linkData: {
 	try {
 		if (linkData.shortUrl.includes(" ")) {
 			throw new DefaultError({
-				message: "Short URL cannot contain spaces.",
+				message: "A URL encurtada não pode conter espaços.",
 				statusCode: 400,
 				type: "error",
 			});
@@ -17,7 +17,7 @@ const createLinkService = async (linkData: {
 		if (!/^[a-z0-9-]+$/.test(linkData.shortUrl)) {
 			throw new DefaultError({
 				message:
-					"Short URL cannot contain special characters or uppercase letters.",
+					"A URL encurtada não pode conter caracteres especiais ou letras maiúsculas.",
 				statusCode: 400,
 				type: "error",
 			});
@@ -29,7 +29,7 @@ const createLinkService = async (linkData: {
 
 		if (checkUrlExists) {
 			throw new DefaultError({
-				message: "This short URL already exists.",
+				message: "Esta URL encurtada já existe.",
 				statusCode: 400,
 				type: "error",
 			});
@@ -43,7 +43,7 @@ const createLinkService = async (linkData: {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to create link",
+			message: "Falha ao criar a URL",
 		});
 	}
 };

@@ -19,11 +19,11 @@ export const getOriginalUrlRoute: FastifyPluginAsyncZod = async (app) => {
 							accesses: z.number(),
 							createdAt: z.date(),
 						})
-						.describe("Original link details"),
+						.describe("Detalhes da URL original"),
 					400: z
 						.object({ message: z.string() })
-						.describe("Failed to retrieve link"),
-					404: z.object({ message: z.string() }).describe("Link not found"),
+						.describe("Falha ao recuperar a URL"),
+					404: z.object({ message: z.string() }).describe("URL não encontrada"),
 				},
 			},
 		},

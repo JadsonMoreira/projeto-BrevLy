@@ -13,7 +13,7 @@ const getOriginalUrlService = async (shortUrl: string) => {
 		if (!link) {
 			throw new DefaultError({
 				statusCode: 404,
-				message: "Short URL not found",
+				message: "URL encurtada não encontrada",
 				type: "error",
 			});
 		}
@@ -23,7 +23,7 @@ const getOriginalUrlService = async (shortUrl: string) => {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to find link",
+			message: "Falha ao encontrar a URL",
 		});
 	}
 };

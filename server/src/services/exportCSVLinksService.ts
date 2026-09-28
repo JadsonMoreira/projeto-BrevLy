@@ -17,7 +17,7 @@ const exportCSVLinksService = async () => {
 
 		if (!links.length) {
 			throw new DefaultError({
-				message: "No links found to export.",
+				message: "Nenhuma URL encontrada para exportar.",
 				statusCode: 404,
 				type: "error",
 			});
@@ -55,7 +55,7 @@ const exportCSVLinksService = async () => {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to export links to CSV",
+			message: "Falha ao exportar URLs para CSV",
 		});
 	}
 };

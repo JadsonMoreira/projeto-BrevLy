@@ -25,7 +25,7 @@ app.setSerializerCompiler(serializerCompiler);
 app.setErrorHandler((error, request, reply) => {
 	if (hasZodFastifySchemaValidationErrors(error)) {
 		return reply.status(400).send({
-			message: "Validation error",
+			message: "Erro de validação",
 			errors: error.validation,
 		});
 	}
@@ -33,7 +33,7 @@ app.setErrorHandler((error, request, reply) => {
 	console.error(error);
 
 	return reply.status(500).send({
-		message: "Internal server error",
+		message: "Erro interno do servidor",
 	});
 });
 

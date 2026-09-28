@@ -17,10 +17,10 @@ export const increaseAccessToLinkRoute: FastifyPluginAsyncZod = async (app) => {
 				response: {
 					200: z
 						.object({ message: z.string() })
-						.describe("Link access count increased successfully"),
+						.describe("Contagem de acessos da URL incrementada com sucesso"),
 					400: z
 						.object({ message: z.string() })
-						.describe("Failed to increase link access count"),
+						.describe("Falha ao incrementar a contagem de acessos da URL"),
 				},
 			},
 		},
@@ -30,7 +30,7 @@ export const increaseAccessToLinkRoute: FastifyPluginAsyncZod = async (app) => {
 				await IncreaseAccessToLinkService(id);
 				return reply
 					.status(200)
-					.send({ message: "Link access count increased successfully" });
+					.send({ message: "Contagem de acessos da URL incrementada com sucesso" });
 			} catch (error: any) {
 				return reply.status(400).send({ message: error.message });
 			}

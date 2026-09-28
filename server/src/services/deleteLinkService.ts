@@ -12,7 +12,7 @@ const deleteLinkService = async (linkId: string) => {
 
 		if (!existingLink.length) {
 			throw new DefaultError({
-				message: "Link not found",
+				message: "URL não encontrada",
 				statusCode: 404,
 				type: "error",
 			});
@@ -23,7 +23,7 @@ const deleteLinkService = async (linkId: string) => {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to delete link",
+			message: "Falha ao deletar a URL",
 		});
 	}
 };

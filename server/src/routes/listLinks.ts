@@ -24,10 +24,10 @@ export const listLinksRoute: FastifyPluginAsyncZod = async (app) => {
 								createdAt: z.date(),
 							}),
 						)
-						.describe("List of links"),
+						.describe("Lista de URLs"),
 					400: z
 						.object({ message: z.string() })
-						.describe("Failed to retrieve links"),
+						.describe("Falha ao listar as URLs"),
 				},
 			},
 		},

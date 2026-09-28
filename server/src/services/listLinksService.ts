@@ -14,7 +14,7 @@ const listLinksService = async () => {
 		throw new DefaultError(error as DefaultError, {
 			statusCode: 400,
 			type: "error",
-			message: "Failed to list links",
+			message: "Falha ao listar as URLs",
 		});
 	}
 };
