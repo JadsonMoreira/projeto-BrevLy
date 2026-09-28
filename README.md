@@ -65,9 +65,12 @@ BrevLy/
 ├── web/                  # Frontend (React + Vite + Tailwind)
 │   ├── src/
 │   │   ├── api/         # Chamadas HTTP com Axios
-│   │   ├── components/  # Componentes reutilizáveis (form, listagem, modal)
-│   │   ├── pages/       # Páginas principais (Home, Redirect, NotFound)
-│   │   └── routes/      # Configuração do React Router
+│   │   ├── assets/      # Ícones e ilustrações SVG
+│   │   ├── components/  # Componentes da interface (formulários, cards, listagem)
+│   │   ├── pages/       # Páginas da aplicação (Home, Redirect, NotFound)
+│   │   ├── utils/       # Funções utilitárias
+│   │   ├── app.tsx      # Definição e configuração das rotas (React Router)
+│   │   └── main.tsx     # Ponto de entrada da aplicação React
 │   └── package.json
 ```
 
@@ -171,7 +174,7 @@ cd projeto-BrevLy
 | `DELETE` | `/links/:id` | Remove uma URL encurtada |
 | `GET` | `/links/:shortUrl` | Retorna a URL original correspondente ao código encurtado |
 | `PATCH` | `/links/:id/access` | Incrementa o número de acessos da URL |
-| `POST` | `/links/export/csv` | Gera o CSV com as URLs, envia ao R2 e retorna o link de download |
+| `GET` | `/links/export` | Gera o CSV com as URLs, envia ao R2 e retorna o link de download |
 | `GET` | `/docs` | Interface do Swagger com a documentação interativa |
 
 ---
