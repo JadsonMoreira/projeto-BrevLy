@@ -38,7 +38,7 @@ app.setErrorHandler((error, request, reply) => {
 });
 
 app.register(fastifyCors, {
-	origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+	origin: ["*"],
 	methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 });
 
@@ -47,7 +47,13 @@ app.register(fastifySwagger, {
 	openapi: {
 		info: {
 			title: "BrevLy API",
-			description: "API for BrevLy project FTR",
+			description: `
+			API RESTful para encurtamento de URLs, contagem de cliques em tempo real e exportação de relatórios em CSV via Cloudflare R2.
+			> 🎓 Projeto da **Pós-Graduação em Desenvolvimento Full Stack** — **Faculdade de Tecnologia Rocketseat (FTR)**.
+			* **Endpoints Principais:** Criação de slugs personalizados, redirecionamento, métricas de acessos e exportação tabular.
+			* **Stack:** Node.js, Fastify, PostgreSQL, Drizzle ORM, Zod e Cloudflare R2.
+			* **Autor:** Jadson Moreira
+			`.trim(),
 			version: "1.0.0",
 		},
 	},

@@ -28,11 +28,9 @@ export const increaseAccessToLinkRoute: FastifyPluginAsyncZod = async (app) => {
 			try {
 				const { id } = request.params as { id: string };
 				await IncreaseAccessToLinkService(id);
-				return reply
-					.status(200)
-					.send({
-						message: "Contagem de acessos da URL incrementada com sucesso",
-					});
+				return reply.status(200).send({
+					message: "Contagem de acessos da URL incrementada com sucesso",
+				});
 			} catch (error: any) {
 				return reply.status(400).send({ message: error.message });
 			}
